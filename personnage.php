@@ -13,12 +13,22 @@
 
 
 <div class="container">
-    <h1 style="text-align: center;"> Bienvenue !</h1>
-    <a href="personnage.php">
-        <button type="button" class="btn btn-warning" style="width: 40%; margin-top: 20%; margin-left: 30%;"> Jouer
-        </button>
-    </a>
-
+    <h1 style="text-align: center;"> Choisissez un personnage :</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <a href=""><img src="img/barbare.jpg"></a>
+            <h2 style="padding-top: 70px; color: #c0383e">Barbare</h2>
+        </div>
+        <div class="col-md-4">
+            <a href=""><img src="img/magicien.jpg"></a>
+            <h2 style="padding-top: 50px; color: #c0383e">Magicien</h2>
+        </div>
+        <div class="col-md-4">
+            <a href=""><img src="img/paladin.jpg"></a>
+            <h2 style="color: #c0383e">Paladin</h2>
+        </div>
+    </div>
 </div>
 
 

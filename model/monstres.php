@@ -1,27 +1,26 @@
 <?php
 
-class Personnage {
+class Monstre {
 
-    private  $_id,
-             $_nom,
-             $_classe,
-             $_point_vie,
-             $_point_def,
-             $_point_att,
-             $_point_vit,
-             $_point_mag,
-             $_bourse_or;
+    private $_id,
+            $_nom,
+            $_point_vie,
+            $_point_def,
+            $_point_att,
+            $_point_vit;
 
-    const CEST_MOI = 1;
-    const PERSONNAGE_TUE = 2;
-    const PERSONNAGE_FRAPPE = 3;
+
+
+     const CEST_MOI = 1;
+     const MONSTRE_TUE = 2;
+     const MONSTRE_FRAPPE = 3;
 
 
     public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
     }
-    public function frapper(Personnage $perso)
+    public function frapper(Monstre $perso)
     {
         if ($perso->id() == $this->_id) {
             return self::CEST_MOI;
@@ -48,13 +47,12 @@ class Personnage {
         // Si on a 100 de dégâts ou plus, on dit que le personnage a été tué.
         if ($this->_point_vie >= 100)
         {
-            return self::PERSONNAGE_TUE;
+            return self::MONSTRE_TUE;
         }
 
         // Sinon, on se contente de dire que le personnage a bien été frappé.
-        return self::PERSONNAGE_FRAPPE;
+        return self::MONSTRE_FRAPPE;
     }
-
 
 
     public function id()
@@ -65,15 +63,10 @@ class Personnage {
     {
         return $this->_nom;
     }
-    public function classe()
-    {
-        return $this->_classe;
-    }
     public function degats()
     {
         return $this->_point_vie;
     }
-
 
 
     public function setId($id)
@@ -101,5 +94,4 @@ class Personnage {
             $this->_point_vie = $point_vie;
         }
     }
-
 }

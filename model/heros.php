@@ -98,4 +98,67 @@ class Heros {
         }
     }
 
+    function execute($sql) {
+        $result = self::$pdo->query($sql);
+        return $result;
+    }
+
+    function insert($table, $values) {
+        $sql = 'INSERT INTO '.$table.' (';
+
+        foreach ($values as $fieldName => $value) {
+            $sql .= $fieldName.',';
+        }
+        $sql = rtrim($sql, ',');
+        $sql .= ') VALUES (';
+
+        foreach ($values as $fieldName => $value) {
+            $sql .= '"'.$value.'",';
+        }
+        $sql = rtrim($sql, ',');
+        $sql .= ')';
+
+        $result = self::$pdo->query($sql);
+        return $result;
+    }
+
+    function select($table, $fields, $where = '') {
+        $sql = 'SELECT ';
+        if (is_array($fields)) {
+            foreach ($fields as $field) {
+                $sql .= $field.',';
+            }
+            $sql = rtrim($sql, ',');
+        } else {
+            $sql .= $fields;
+        }
+
+        $sql .= ' FROM '.$table.' WHERE 1 = 1 AND '.$where;
+
+        $result = self::$pdo->query($sql);
+        if (!empty($result)) {
+            $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $result;
+    }
+
+    function update($table, $values, $where) {
+        $sql = 'UPDATE '.$table.' SET ';
+
+        foreach ($values as $fieldName => $value) {
+            $sql .= $fieldName.' = "'.$value.'",';
+        }
+        $sql = rtrim($sql, ',');
+        $sql .= ' WHERE '.$where;
+
+        $result = self::$pdo->query($sql);
+        return $result;
+    }
+
+    function delete($table, $where) {
+        $sql = 'DELETE FROM '.$table.' WHERE '.$where;
+        $result = self::$pdo->query($sql);
+        return $result;
+    }
+
 }

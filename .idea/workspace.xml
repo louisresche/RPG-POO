@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="72e56e53-8ee8-4029-8618-30e40f982fff" name="Default" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/heros.php" afterPath="$PROJECT_DIR$/model/heros.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/joueurs.php" afterPath="$PROJECT_DIR$/model/joueurs.php" />
@@ -14,6 +15,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/heros.php" afterPath="$PROJECT_DIR$/model/heros.php" />
 >>>>>>> master
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/niveaux.php" afterPath="$PROJECT_DIR$/model/niveaux.php" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+>>>>>>> master
     </list>
     <ignored path="RPG-POO.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,6 +43,7 @@
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <state relative-caret-position="255">
               <caret line="17" column="115" selection-start-line="17" selection-start-column="115" selection-end-line="17" selection-end-column="115" />
 =======
@@ -46,6 +51,14 @@
               <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
 >>>>>>> master
               <folding />
+=======
+            <state relative-caret-position="435">
+              <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+              <folding>
+                <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#a#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+>>>>>>> master
             </state>
           </provider>
         </entry>
@@ -326,19 +339,27 @@
       <workItem from="1487684930721" duration="9000" />
       <workItem from="1487753345892" duration="5277000" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1487866995921" duration="2914000" />
       <workItem from="1487928099219" duration="1338000" />
 =======
       <workItem from="1487866995921" duration="6577000" />
+>>>>>>> master
+=======
+      <workItem from="1487866995921" duration="7081000" />
 >>>>>>> master
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="9843000" />
 =======
     <option name="totallyTimeSpent" value="12168000" />
+>>>>>>> master
+=======
+    <option name="totallyTimeSpent" value="12672000" />
 >>>>>>> master
   </component>
   <component name="ToolWindowManager">
@@ -392,8 +413,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 <<<<<<< HEAD
+=======
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#a#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+>>>>>>> master
         </state>
       </provider>
     </entry>
@@ -464,7 +492,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#a#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -592,9 +623,18 @@
 =======
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="180">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
+>>>>>>> master
+=======
+        <state relative-caret-position="435">
+          <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#a#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
 >>>>>>> master
         </state>
       </provider>

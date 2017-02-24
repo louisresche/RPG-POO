@@ -1,6 +1,6 @@
 <?php
 
-class Niveaux {
+class Niveau {
 
     private $_id,
             $_salles,

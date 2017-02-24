@@ -1,164 +1,188 @@
 <?php
 
-class Heros {
-
-    private  $_id,
-             $_nom,
-             $_classe,
-             $_point_vie,
-             $_point_def,
-             $_point_att,
-             $_point_vit,
-             $_point_mag,
-             $_bourse_or;
+class Heros 
+{
+    private $_id;
+    private $_nom;
+    private $_point_vie;
+    private $_experience;
+    private $_niveau;
+    private $_nbCoups;
+    private $_dateDernierCoup;
 
     const CEST_MOI = 1;
     const PERSONNAGE_TUE = 2;
     const PERSONNAGE_FRAPPE = 3;
-
+    const PAS_AUJOURDHUI = 4;
 
     public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
     }
+
+
     public function frapper(Personnage $perso)
     {
-        if ($perso->id() == $this->_id) {
+        if ($this->id() == $perso->id()){
             return self::CEST_MOI;
         }
 
-        return $perso->recevoirDegats();
+
+
+        if ($this->setNbCoups($this->nbCoups() + 1)){
+
+        } else {
+            $this->setNbCoups(1);
+        }
+
+
+
+
+        return $perso->recevoirpoint_vie($this->niveau() - 5);
     }
+
+    public function recevoirpoint_vie($force)
+    {
+        $this->setpoint_vie($this->point_vie() + $force);
+        if ($this->point_vie() == 0){
+            return self::PERSONNAGE_TUE;
+        }
+        return self::PERSONNAGE_FRAPPE;
+    }
+
+    public function gagnerExperience(){
+        $this->setExperience($this->experience() + $this->niveau() * 2);
+
+        if ($this->experience() >= 100){
+            $this->setNiveau($this->niveau() + 1);
+            $this->setExperience(0);
+        }
+    }
+
     public function hydrate(array $donnees)
     {
         foreach ($donnees as $key => $value)
         {
             $method = 'set'.ucfirst($key);
-
             if (method_exists($this, $method))
             {
                 $this->$method($value);
             }
         }
     }
-    public function recevoirDegats(){
-
-        $this->_point_vie += 5;
-
-        // Si on a 100 de dégâts ou plus, on dit que le personnage a été tué.
-        if ($this->_point_vie >= 100)
-        {
-            return self::PERSONNAGE_TUE;
-        }
-
-        // Sinon, on se contente de dire que le personnage a bien été frappé.
-        return self::PERSONNAGE_FRAPPE;
-    }
-
-
 
     public function id()
     {
         return $this->_id;
     }
+
     public function nom()
     {
         return $this->_nom;
     }
-    public function degats()
+
+    public function point_vie()
     {
         return $this->_point_vie;
     }
 
+    public function experience(){
+        return $this->_experience;
+    }
 
+    public function niveau()
+    {
+        return $this->_niveau;
+    }
+
+    public function nbCoups()
+    {
+        return $this->_nbCoups;
+    }
+
+    public function dateDernierCoup()
+    {
+        return $this->_dateDernierCoup;
+    }
 
     public function setId($id)
     {
         $id = (int) $id;
-
-        if ($id > 0)
-        {
+        if ($id >= 0) {
             $this->_id = $id;
         }
     }
+
     public function setNom($nom)
     {
-        if (is_string($nom))
-        {
+        if (is_string($nom)) {
             $this->_nom = $nom;
         }
     }
-    public function setDegats($point_vie)
+
+    public function setpoint_vie($point_vie)
     {
         $point_vie = (int) $point_vie;
+        //if ($point_vie >= 0 && $point_vie <= 100) {
+        $this->_point_vie = $point_vie;
+        //}
+    }
 
-        if ($point_vie >= 0 && $point_vie <= 100)
-        {
-            $this->_point_vie = $point_vie;
+    public function setExperience($experience)
+    {
+        $experience = (int) $experience;
+        //if ($experience >= 0 && $experience <= 100) {
+        $this->_experience = $experience;
+        //}
+    }
+
+    public function setNiveau($niveau)
+    {
+        $niveau = (int) $niveau;
+        if ($niveau >= 0 && $niveau <= 100) {
+            $this->_niveau = $niveau;
         }
     }
 
-    function execute($sql) {
-        $result = self::$pdo->query($sql);
-        return $result;
+    public function setNbCoups($nbCoups)
+    {
+        $nbCoups = (int) $nbCoups;
+        if ($nbCoups >= 0 && $nbCoups <= 100) {
+            $this->_nbCoups = $nbCoups;
+        }
     }
 
-    function insert($table, $values) {
-        $sql = 'INSERT INTO '.$table.' (';
-
-        foreach ($values as $fieldName => $value) {
-            $sql .= $fieldName.',';
-        }
-        $sql = rtrim($sql, ',');
-        $sql .= ') VALUES (';
-
-        foreach ($values as $fieldName => $value) {
-            $sql .= '"'.$value.'",';
-        }
-        $sql = rtrim($sql, ',');
-        $sql .= ')';
-
-        $result = self::$pdo->query($sql);
-        return $result;
+    public function setDateDernierCoup($dateDernierCoup)
+    {
+        $dateDernierCoup = DateTime::createFromFormat("Y-m-d", $dateDernierCoup);
+        $this->_dateDernierCoup = $dateDernierCoup;
     }
 
-    function select($table, $fields, $where = '') {
-        $sql = 'SELECT ';
-        if (is_array($fields)) {
-            foreach ($fields as $field) {
-                $sql .= $field.',';
-            }
-            $sql = rtrim($sql, ',');
-        } else {
-            $sql .= $fields;
-        }
+    public function nomValide()
+    {
+        return !(empty($this->_nom));
+    }
+}
 
-        $sql .= ' FROM '.$table.' WHERE 1 = 1 AND '.$where;
 
-        $result = self::$pdo->query($sql);
-        if (!empty($result)) {
-            $result = $result->fetchAll(PDO::FETCH_ASSOC);
-        }
-        return $result;
+class Magicien extends Heros
+{
+
+    private $_magie; // Indique la puissance du magicien sur 100, sa capacité à produire de la magie.
+
+    public function lancerUnSort($perso)
+    {
+        $perso->recevoirDegats($this->_magie); // On va dire que la magie du magicien représente sa force.
     }
 
-    function update($table, $values, $where) {
-        $sql = 'UPDATE '.$table.' SET ';
+}
 
-        foreach ($values as $fieldName => $value) {
-            $sql .= $fieldName.' = "'.$value.'",';
-        }
-        $sql = rtrim($sql, ',');
-        $sql .= ' WHERE '.$where;
+class Paladin extends Heros
+{
 
-        $result = self::$pdo->query($sql);
-        return $result;
-    }
+}
 
-    function delete($table, $where) {
-        $sql = 'DELETE FROM '.$table.' WHERE '.$where;
-        $result = self::$pdo->query($sql);
-        return $result;
-    }
+class Barbare extends Heros
+{
 
 }

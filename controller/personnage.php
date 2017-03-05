@@ -1,5 +1,5 @@
 <?php
-class HerosManager
+class PersonnagesManager
 {
     private $_db;
 
@@ -8,38 +8,38 @@ class HerosManager
         $this->setDb($db);
     }
 
-    public function add(Joueur $perso)
+    public function add(Personnage $perso)
     {
-        $q = $this->_db->prepare('INSERT INTO Héros (nom) VALUES (:nom)');
+        $q = $this->_db->prepare('INSERT INTO hero (nom) VALUES (:nom)');
         $q->bindValue(':nom', $perso->nom());
         $q->execute();
 
         $perso->hydrate([
             'id'=>$this->_db->lastInsertId(),
-            'point_vie' => 0,
-            'classe' => 0,
+            'pv' => 0,
+            'experience' => 0,
             'niveau' => 1,
             'nbCoups' => 0,]);
     }
 
     public function count()
     {
-        return $this->_db->query('SELECT COUNT(*) FROM Héros')->fetchColumn();
+        return $this->_db->query('SELECT COUNT(*) FROM hero')->fetchColumn();
     }
 
-    public function delete(Joueur $perso)
+    public function delete(Personnage $perso)
     {
-        $this->_db->exec('DELETE FROM Héros WHERE id = '.$perso->id());
+        $this->_db->exec('DELETE FROM hero WHERE id = '.$perso->id());
     }
 
     public function exists($info)
     {
         if (is_int($info))
         {
-            return (bool)$this->_db->query('SELECT COUNT(*) FROM Héros WHERE id = '.$info)->fetchColumn();
+            return (bool)$this->_db->query('SELECT COUNT(*) FROM hero WHERE id = '.$info)->fetchColumn();
         }
 
-        $q = $this->_db->prepare('SELECT COUNT(*) FROM Héros WHERE nom = :nom');
+        $q = $this->_db->prepare('SELECT COUNT(*) FROM hero WHERE nom = :nom');
         $q -> execute([':nom' => $info]);
 
         return (bool) $q->fetchColumn();
@@ -49,38 +49,38 @@ class HerosManager
     {
         if (is_int($info))
         {
-            $q = $this->_db->query('SELECT id, nom, point_vie, classe, niveau  FROM Héros WHERE id = '.$info);
+            $q = $this->_db->query('SELECT id, nom, pv, experience, niveau  FROM hero WHERE id = '.$info);
             $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-            return new Joueur($donnees);
+            return new Personnage($donnees);
         }
 
-        $q = $this -> _db ->prepare('SELECT id, nom, point_vie, classe, niveau FROM Héros WHERE nom = :nom');
+        $q = $this -> _db ->prepare('SELECT id, nom, pv, experience, niveau FROM hero WHERE nom = :nom');
         $q->execute([':nom' => $info]);
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-        return new heros($donnees);
+        return new Personnage($donnees);
     }
 
     public function getList($nom)
     {
         $persos = [];
 
-        $q  =  $this->_db->prepare('SELECT id, nom, point_vie, classe, niveau FROM Héros WHERE nom <> :nom ORDER BY nom');
+        $q  =  $this->_db->prepare('SELECT id, nom, pv, experience, niveau FROM hero WHERE nom <> :nom ORDER BY nom');
         $q->execute([':nom'=>$nom]);
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
-            $persos[] = new Joueur($donnees);
+            $persos[] = new Personnage($donnees);
         }
         return $persos;
     }
 
-    public function update(Joueur $perso)
+    public function update(Personnage $perso)
     {
-        $q  =  $this->_db->prepare('UPDATE Héros SET point_vie = :point_vie, classe = :classe, niveau = :niveau WHERE id = :id');
+        $q  =  $this->_db->prepare('UPDATE hero SET pv = :pv, experience = :experience, niveau = :niveau WHERE id = :id');
         $q->bindValue(':pv',$perso->pv(), PDO::PARAM_INT);
-        $q->bindValue(':classe',$perso->classe(), PDO::PARAM_INT);
+        $q->bindValue(':experience',$perso->experience(), PDO::PARAM_INT);
         $q->bindValue(':niveau',$perso->niveau(), PDO::PARAM_INT);
 
 

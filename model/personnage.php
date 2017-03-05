@@ -1,10 +1,9 @@
 <?php
-
-class Heros 
+class Personnage
 {
     private $_id;
     private $_nom;
-    private $_point_vie;
+    private $_pv;
     private $_experience;
     private $_niveau;
     private $_nbCoups;
@@ -38,13 +37,13 @@ class Heros
 
 
 
-        return $perso->recevoirpoint_vie($this->niveau() - 5);
+        return $perso->recevoirpv($this->niveau() - 5);
     }
 
-    public function recevoirpoint_vie($force)
+    public function recevoirpv($force)
     {
-        $this->setpoint_vie($this->point_vie() + $force);
-        if ($this->point_vie() == 0){
+        $this->setpv($this->pv() + $force);
+        if ($this->pv() == 0){
             return self::PERSONNAGE_TUE;
         }
         return self::PERSONNAGE_FRAPPE;
@@ -81,9 +80,9 @@ class Heros
         return $this->_nom;
     }
 
-    public function point_vie()
+    public function pv()
     {
-        return $this->_point_vie;
+        return $this->_pv;
     }
 
     public function experience(){
@@ -120,11 +119,11 @@ class Heros
         }
     }
 
-    public function setpoint_vie($point_vie)
+    public function setpv($pv)
     {
-        $point_vie = (int) $point_vie;
-        //if ($point_vie >= 0 && $point_vie <= 100) {
-        $this->_point_vie = $point_vie;
+        $pv = (int) $pv;
+        //if ($pv >= 0 && $pv <= 100) {
+        $this->_pv = $pv;
         //}
     }
 
@@ -162,27 +161,4 @@ class Heros
     {
         return !(empty($this->_nom));
     }
-}
-
-
-class Magicien extends Heros
-{
-
-    private $_magie; // Indique la puissance du magicien sur 100, sa capacité à produire de la magie.
-
-    public function lancerUnSort($perso)
-    {
-        $perso->recevoirDegats($this->_magie); // On va dire que la magie du magicien représente sa force.
-    }
-
-}
-
-class Paladin extends Heros
-{
-
-}
-
-class Barbare extends Heros
-{
-
 }

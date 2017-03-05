@@ -10,5 +10,19 @@ class Niveau {
             $_portes;
 
 
+    public function create(){
 
+    }
+
+    public function read(){
+
+    }
+
+    public function update(){
+
+    }
+
+    public function destroy(){
+
+    }
 }
